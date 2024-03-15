@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Student Register</title>
+                <style>
+            body {
+                background-color: gray;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .form-container {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .header {
+                text-align: center;
+                font-size: 24px;
+                text-decoration: underline;
+            }
+            .buttons {
+                text-align: center;
+            }
+            .button {
+                background-color: black;
+                color: white;
+                border: 1px solid gray;
+                padding: 10px 20px;
+                margin: 0 10px;
+                text-decoration: none;
+                display: inline-block;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+            .button:hover {
+                background-color: #333;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="CreateNewStudents">
+       <p:panel header="create new Student :">
+           <p:panelGrid columns="2">
+               <p:outputLabel value="Enter name "/>
+               <p:inputText id="n" value="#{student.name}"/>
+               <p:outputLabel value="Enter email"/>
+               <p:inputText id="e" value="#{student.email}"/>
+               <p:outputLabel value="Enter password"/>
+               <p:password id="p" value="#{student.password}"/>
+               <p:outputLabel value="Enter Your Country :"/>
+               <p:selectOneMenu id="c" value="#{student.country}" required="true">
+                   <f:selectItem itemLabel="Select a country" itemValue="" />
+                   <f:selectItems value="#{student.countries}" />
+               </p:selectOneMenu> 
+               <p:outputLabel value="Enter Date of Birth"/>
+               <p:calendar id="d" value="#{student.dateOfBirth}"/>
+               <p:outputLabel value="Enter Balance"/>
+               <p:inputText id="b" value="#{student.balance}">
+             <f:convertNumber pattern = "#000.000" />  
+         </p:inputText>
+         <p:outputLabel value=" enter Specialization"/>
+         <p:inputText id="s" value="#{student.specialization}"/>
+        </p:panelGrid>
+           <p:commandButton id="button" value="ADD" action="#{student.create()}"/>
+    </p:panel>
+         
+</h:form>
+    </h:body>
+</html>
+

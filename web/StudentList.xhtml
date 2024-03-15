@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+                <style>
+            body {
+                background-color: gray;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .form-container {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .header {
+                text-align: center;
+                font-size: 24px;
+                text-decoration: underline;
+            }
+            .buttons {
+                text-align: center;
+            }
+            .button {
+                background-color: black;
+                color: white;
+                border: 1px solid gray;
+                padding: 10px 20px;
+                margin: 0 10px;
+                text-decoration: none;
+                display: inline-block;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+            .button:hover {
+                background-color: #333;
+            }
+            .search-button-container {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.lens-shape-button {
+    border-radius: 50%;
+    width: 50px; /* Adjust the width and height according to your preference */
+    height: 50px;
+    border: 2px solid #007bff; /* Adjust the border color as needed */
+    background-color: transparent; /* Adjust the background color as needed */
+    color: #007bff; /* Adjust the icon color as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    text-align: center;
+    line-height: 50px; /* Adjust the line height to center the icon */
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none; /* Remove the default link underline */
+}
+
+.lens-shape-button:hover {
+    background-color: #007bff; /* Change the background color on hover */
+    color: #fff; /* Change the icon color on hover */
+}
+        </style>
+        
+    </h:head>
+    <h:body>
+       <h:form>
+            <div class="search-button-container">
+                <h3>Search</h3>
+            <p:button styleClass="lens-shape-button" icon="pi pi-search" outcome="StudentSearsh.xhtml" />
+        </div>
+    <p:dataTable var="students" value="#{student.all}">
+        <p:column headerText="ID">
+            <h:outputText value="#{students.id}" />
+        </p:column>
+        <p:column headerText="Name">
+            <h:outputText value="#{students.name}" />
+        </p:column>
+        <p:column headerText="Email">
+            <h:outputText value="#{students.email}" />
+        </p:column>
+        <p:column headerText="Password">
+            <h:outputText value="#{students.password}" />
+        </p:column>
+        <p:column headerText="Date of Birth">
+            <h:outputText value="#{students.dateOfBirth}" />
+        </p:column>
+        <p:column headerText="Country">
+            <h:outputText value="#{students.country}" />
+        </p:column>
+        <p:column headerText="Balance">
+            <h:outputText value="#{students.balance}" />
+        </p:column>
+        <p:column headerText="Specialization">
+            <h:outputText value="#{students.specialization}" />
+        </p:column>
+        
+        <p:column headerText="Edit">
+            <p:commandButton value="Edit" oncomplete="PF('editDialog').show()" actionListener="#{student.setSelectedStudent(student)}"  />
+            <p:commandButton value="Delete" actionListener="#{student.delete(students)}" />
+        </p:column>
+    </p:dataTable>
+    <p:dialog id="editDialog" header="Edit student" widgetVar="editDialog" resizable="false" modal="true">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel for="editID" value="ID" />
+                <p:inputText id="editID" value="#{student.selectedStudent.id}" /> 
+
+                <h:outputLabel for="editName" value="Name" />
+                <p:inputText id="editName" value="#{student.selectedStudent.name}" />
+
+                <h:outputLabel for="editEmail" value="Email" />
+                <p:inputText id="editEmail" value="#{student.selectedStudent.email}" />
+
+                <h:outputLabel for="editPassword" value="Password" />
+                <p:password id="editPassword" value="#{student.selectedStudent.password}" />
+
+                <h:outputLabel for="editCountry" value="Country" />
+                <p:inputText id="editCountry" value="#{student.selectedStudent.country}" />
+
+                <h:outputLabel for="editDateOfBirth" value="Date of Birth" />
+                <p:calendar id="editDateOfBirth" value="#{student.selectedStudent.dateOfBirth}" />
+
+                <h:outputLabel for="editBalance" value="Balance" />
+                <p:inputText id="editBalance" value="#{student.selectedStudent.balance}">
+                    <f:convertNumber pattern="#000.000" />  
+                </p:inputText>
+
+                <h:outputLabel for="editSpecialization" value="Specialization" />
+                <p:inputText id="editSpecialization" value="#{student.selectedStudent.specialization}" />
+            </h:panelGrid>
+            <p:commandButton value="Save" actionListener="#{student.edit()}" oncomplete="PF('editDialog').hide()" />
+        </h:form>
+    </p:dialog>
+</h:form>
+
+       
+
+    </h:body>
+</html>
+

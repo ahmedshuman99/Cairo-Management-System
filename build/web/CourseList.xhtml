@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Course List</title>
+                <style>
+            body {
+                background-color: gray;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .form-container {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .header {
+                text-align: center;
+                font-size: 24px;
+                text-decoration: underline;
+            }
+            .buttons {
+                text-align: center;
+            }
+            .button {
+                background-color: black;
+                color: white;
+                border: 1px solid gray;
+                padding: 10px 20px;
+                margin: 0 10px;
+                text-decoration: none;
+                display: inline-block;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+            .button:hover {
+                background-color: #333;
+            }
+                </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Enter Your ID"/>
+                <p:inputText value="#{assignCourse.idStudent}"/>
+                 <h:outputLabel value="Enter Course ID "/>
+                 <p:inputText value="#{assignCourse.idCourse}"/>
+            </h:panelGrid>
+            <p:commandButton value="Assign" action="#{assignCourse.create()}" update="@form"/>
+            <p:button value="Show List" outcome="ShowListAssignCourse.xhtml"/>
+        </h:form>
+
+
+        <h:form>
+            <p:dataTable var="courses" value="#{course.all}">
+                <p:column headerText="ID">
+                    <h:outputText value="#{courses.courseId}" />
+                </p:column>
+                <p:column headerText="Name">
+                    <h:outputText value="#{courses.courseName}" />
+                </p:column>
+                <p:column headerText="price ">
+                    <h:outputText value="#{courses.coursePrice}" />
+                </p:column>
+                <p:column headerText="start time">
+            <h:outputText value="#{courses.courseStartTime}" />
+        </p:column>
+         <p:column headerText="end time">
+             <h:outputText value="#{courses.courseEndTime}" />
+        </p:column>
+       <p:column headerText="Apply">
+            
+           <p:commandButton value="Apply" actionListener="#{student.course.courseId}"/>
+        </p:column>
+    </p:dataTable>
+</h:form>
+    </h:body>
+</html>
+
